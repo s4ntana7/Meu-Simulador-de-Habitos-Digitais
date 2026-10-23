@@ -2,191 +2,439 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Tempo nas Redes Sociais</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OFFLINE | Seu tempo, sua vida</title>
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #eaf0f8;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
 
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            width: 90%;
-            max-width: 450px;
-            text-align: center;
-        }
+* {
+    box-sizing: border-box;
+}
 
-        h1 {
-            color: #3454a4;
-            font-size: 26px;
-        }
+body {
+    margin: 0;
+    min-height: 100vh;
+    background: #090b12;
+    color: #f4f5fa;
+    font-family: 'Inter', Arial, sans-serif;
+    padding: 25px 16px;
+}
 
-        p {
-            color: #444;
-            line-height: 1.5;
-        }
+.container {
+    width: 100%;
+    max-width: 900px;
+    margin: auto;
+}
 
-        input {
-            width: 80%;
-            padding: 12px;
-            margin: 15px 0;
-            border: 1px solid #aaa;
-            border-radius: 8px;
-            font-size: 16px;
-        }
+.topo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #262938;
+    padding: 15px 0 25px;
+}
 
-        button {
-            background-color: #3454a4;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+.logo {
+    font-size: 23px;
+    font-weight: 900;
+    letter-spacing: 4px;
+}
 
-        button:hover {
-            background-color: #243d7c;
-        }
+.logo span {
+    color: #c5ff41;
+}
 
-        #resultado {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f2f5fc;
-            border-radius: 10px;
-            text-align: left;
-            line-height: 1.6;
-        }
-    </style>
+.status {
+    color: #c5ff41;
+    font-size: 11px;
+    letter-spacing: 2px;
+}
+
+.hero {
+    padding: 55px 0 35px;
+}
+
+.tag {
+    color: #c5ff41;
+    font-size: 12px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+h1 {
+    font-size: clamp(42px, 8vw, 76px);
+    line-height: 0.98;
+    letter-spacing: -4px;
+    margin: 20px 0;
+}
+
+h1 span {
+    color: #c5ff41;
+}
+
+.subtitulo {
+    color: #a1a5b5;
+    line-height: 1.8;
+    max-width: 550px;
+}
+
+.painel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.card {
+    background: #121520;
+    border: 1px solid #292d3d;
+    border-radius: 18px;
+    padding: 25px;
+}
+
+.card-principal {
+    grid-column: 1 / -1;
+}
+
+.rotulo {
+    color: #a1a5b5;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+input {
+    display: block;
+    width: 100%;
+    margin: 22px 0 16px;
+    padding: 20px;
+    color: #c5ff41;
+    background: #090b12;
+    border: 1px solid #3b4252;
+    border-radius: 12px;
+    outline: none;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+input:focus {
+    border-color: #c5ff41;
+}
+
+input::placeholder {
+    color: #555b6d;
+}
+
+button {
+    width: 100%;
+    padding: 17px;
+    border: none;
+    border-radius: 10px;
+    background: #c5ff41;
+    color: #090b12;
+    font-weight: 900;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: white;
+    transform: translateY(-2px);
+}
+
+.nota {
+    font-size: 12px;
+    color: #777d90;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+.numero {
+    font-size: clamp(30px, 6vw, 48px);
+    font-weight: 900;
+    margin: 15px 0 5px;
+    letter-spacing: -2px;
+}
+
+.numero span {
+    color: #c5ff41;
+}
+
+.barra-fundo {
+    background: #292d3d;
+    height: 7px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.barra {
+    height: 100%;
+    width: 0%;
+    background: #c5ff41;
+    border-radius: 10px;
+    transition: width 0.7s;
+}
+
+.resultado {
+    margin-top: 18px;
+    padding: 25px;
+    background: #171b27;
+    border: 1px solid #34394b;
+    border-left: 4px solid #c5ff41;
+    border-radius: 14px;
+    line-height: 1.8;
+    white-space: pre-line;
+    display: none;
+}
+
+.resultado h2 {
+    margin-top: 0;
+    font-size: 20px;
+}
+
+.resultado strong {
+    color: #c5ff41;
+}
+
+.reflexao {
+    color: #b7bbca;
+}
+
+.rodape {
+    color: #686e80;
+    text-align: center;
+    padding: 35px 0 15px;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 560px) {
+    .painel {
+        grid-template-columns: 1fr;
+    }
+
+    .card-principal {
+        grid-column: auto;
+    }
+
+    h1 {
+        letter-spacing: -2px;
+    }
+
+    .hero {
+        padding-top: 40px;
+    }
+}
+</style>
 </head>
 
 <body>
+<div class="container">
 
-    <div class="container">
-        <h1>📱 Meu Tempo nas Redes Sociais</h1>
+    <header class="topo">
+        <div class="logo">OFF<span>LINE</span>.</div>
+        <div class="status">● PROJETO CONSCIÊNCIA DIGITAL</div>
+    </header>
 
-        <p>
-            Quantas horas por dia você passa nas redes sociais?
-            Descubra quanto tempo isso representa na sua semana e no seu mês!
+    <section class="hero">
+        <div class="tag">SEU TEMPO É IRRECUPERÁVEL.</div>
+        <h1>A vida acontece<br>fora da <span>tela.</span></h1>
+        <p class="subtitulo">
+            Você abre as redes por alguns minutos. Quando percebe,
+            horas se passaram. Descubra o tamanho desse hábito
+            e veja o que poderia fazer com esse tempo.
+        </p>
+    </section>
+
+    <main class="painel">
+
+        <section class="card card-principal">
+            <div class="rotulo">01 / INFORME SEU HÁBITO</div>
+            <h2>Quanto tempo você fica conectado?</h2>
+
+            <label for="horas" class="nota">
+                Digite suas horas diárias nas redes sociais:
+            </label>
+
+            <input
+                type="number"
+                id="horas"
+                min="0"
+                max="24"
+                step="0.5"
+                placeholder="Ex.: 5"
+            >
+
+            <button id="calcular">REVELAR MEU TEMPO ↗</button>
+
+            <p class="nota">
+                Seja sincero. O objetivo não é julgar, mas ajudar
+                você a enxergar seus próprios hábitos.
+            </p>
+        </section>
+
+        <section class="card">
+            <div class="rotulo">02 / NA SUA SEMANA</div>
+            <div class="numero" id="semanal">-- <span>h</span></div>
+            <p class="nota">Horas acumuladas em 7 dias.</p>
+            <div class="barra-fundo">
+                <div class="barra" id="barra"></div>
+            </div>
+        </section>
+
+        <section class="card">
+            <div class="rotulo">03 / NO SEU MÊS</div>
+            <div class="numero" id="mensal">-- <span>h</span></div>
+            <p class="nota">Projeção para 30 dias de uso.</p>
+        </section>
+
+    </main>
+
+    <section class="resultado" id="resultado" aria-live="polite"></section>
+
+    <footer class="rodape">
+        OFFLINE © 2026 — CONECTE-SE COM O QUE REALMENTE IMPORTA.
+    </footer>
+
+</div>
+
+<script>
+// Base de dados fornecida na atividade
+const dadosPesquisa = {
+    mediaNacionalDiaria: 4,
+    alertaSaude: 6,
+    sugestoes: [
+        {
+            limite: 2,
+            mensagem: "Seu tempo está em uma faixa menor de uso. Continue valorizando também as experiências fora da tela."
+        },
+        {
+            limite: 5,
+            mensagem: "As redes já ocupam uma parte importante do seu dia. Vale observar se esse tempo está sendo usado como você gostaria."
+        },
+        {
+            limite: 24,
+            mensagem: "Seu uso diário é elevado. Experimente estabelecer pausas e reservar momentos para descansar, estudar e estar com outras pessoas."
+        }
+    ]
+};
+
+// Formata números para não mostrar casas decimais desnecessárias
+function formatar(numero) {
+    return Number(numero.toFixed(1)).toLocaleString("pt-BR");
+}
+
+// Executa o cálculo quando o botão é clicado
+document.getElementById("calcular").addEventListener("click", function() {
+
+    const campo = document.getElementById("horas");
+    const horas = Number(campo.value);
+    const resultado = document.getElementById("resultado");
+
+    if (
+        campo.value.trim() === "" ||
+        !Number.isFinite(horas) ||
+        horas < 0 ||
+        horas > 24
+    ) {
+        resultado.style.display = "block";
+        resultado.innerHTML =
+            "<h2>Ops! Vamos tentar novamente.</h2>" +
+            "<p>Digite um valor entre 0 e 24 horas por dia.</p>";
+        return;
+    }
+
+    const semana = horas * 7;
+    const mes = horas * 30;
+    const ano = horas * 365;
+
+    document.getElementById("semanal").innerHTML =
+        formatar(semana) + " <span>h</span>";
+
+    document.getElementById("mensal").innerHTML =
+        formatar(mes) + " <span>h</span>";
+
+    // A barra representa a parte de um dia ocupada pelas redes
+    document.getElementById("barra").style.width =
+        (horas / 24 * 100) + "%";
+
+    let mensagem;
+    if (horas <= dadosPesquisa.sugestoes[0].limite) {
+        mensagem = dadosPesquisa.sugestoes[0].mensagem;
+    } else if (horas <= dadosPesquisa.sugestoes[1].limite) {
+        mensagem = dadosPesquisa.sugestoes[1].mensagem;
+    } else {
+        mensagem = dadosPesquisa.sugestoes[2].mensagem;
+    }
+
+    let comparacao;
+    if (horas < dadosPesquisa.mediaNacionalDiaria) {
+        comparacao = "Você está abaixo da média de referência de " +
+            dadosPesquisa.mediaNacionalDiaria + " horas por dia.";
+    } else if (horas === dadosPesquisa.mediaNacionalDiaria) {
+        comparacao = "Você está exatamente na média de referência de " +
+            dadosPesquisa.mediaNacionalDiaria + " horas por dia.";
+    } else {
+        comparacao = "Você está acima da média de referência de " +
+            dadosPesquisa.mediaNacionalDiaria + " horas por dia.";
+    }
+
+    let alerta = "";
+    if (horas >= dadosPesquisa.alertaSaude) {
+        alerta = " Seu uso também atingiu ou ultrapassou as " +
+            dadosPesquisa.alertaSaude +
+            " horas definidas como alerta na base desta atividade.";
+    }
+
+    // Estimativa ilustrativa do tempo acumulado em um ano
+    const diasNoAno = ano / 24;
+
+    resultado.style.display = "block";
+    resultado.innerHTML = `
+        <div class="rotulo">04 / SEU DIAGNÓSTICO DIGITAL</div>
+        <h2>Seu tempo, em perspectiva.</h2>
+
+        <p>Você passa <strong>${formatar(horas)} horas por dia</strong>
+        nas redes sociais.</p>
+
+        <p>Em uma semana, são <strong>${formatar(semana)} horas</strong>.
+        Em 30 dias, são <strong>${formatar(mes)} horas</strong>.</p>
+
+        <p>Isso equivale a aproximadamente
+        <strong>${formatar(diasNoAno)} dias inteiros</strong>
+        de uso ao longo de um ano, se o hábito continuar igual.</p>
+
+        <p>${comparacao}${alerta}</p>
+
+        <p><strong>ANÁLISE:</strong> ${mensagem}</p>
+
+        <p class="reflexao">
+        E se uma parte desse tempo fosse usada para aprender algo novo,
+        praticar um esporte, dormir melhor ou conversar com alguém
+        sem olhar para o celular?
         </p>
 
-        <input
-            type="number"
-            id="horas"
-            placeholder="Digite suas horas por dia"
-            min="0"
-            max="24"
-            step="0.5"
-        >
+        <p><strong>DESAFIO OFFLINE:</strong>
+        tente reservar 30 minutos do seu dia longe das redes.
+        Pequenas mudanças também contam.</p>
+    `;
 
-        <br>
+    resultado.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    });
+});
 
-        <button id="calcular">Calcular meu tempo</button>
-
-        <div id="resultado" aria-live="polite">
-            Seu resultado aparecerá aqui.
-        </div>
-    </div>
-
-    <script>
-        // Base de dados da pesquisa fornecida na atividade
-        const dadosPesquisa = {
-            mediaNacionalDiaria: 4,
-            alertaSaude: 6,
-            sugestoes: [
-                {
-                    limite: 2,
-                    mensagem: "Parabéns! Seu uso está equilibrado. Você tem mais tempo livre para hobbies e descanso."
-                },
-                {
-                    limite: 5,
-                    mensagem: "Atenção! Você está próximo da média nacional e já gasta bastante tempo da semana olhando para a tela."
-                },
-                {
-                    limite: 24,
-                    mensagem: "Cuidado! Seu uso é considerado muito alto. Isso pode afetar seu sono, foco e bem-estar. Que tal fazer uma pausa digital?"
-                }
-            ]
-        };
-
-        // Captura o clique do botão
-        document.getElementById("calcular").addEventListener("click", function() {
-
-            // Pega o valor digitado pelo usuário
-            const campoHoras = document.getElementById("horas");
-            const horasDiarias = Number(campoHoras.value);
-            const resultado = document.getElementById("resultado");
-
-            // Valida o valor informado
-            if (campoHoras.value.trim() === "" ||
-                !Number.isFinite(horasDiarias) ||
-                horasDiarias < 0 ||
-                horasDiarias > 24) {
-
-                resultado.innerText =
-                    "Por favor, digite um número entre 0 e 24 horas.";
-                return;
-            }
-
-            // Calcula o tempo semanal e mensal
-            const horasSemanais = horasDiarias * 7;
-            const horasMensais = horasDiarias * 30;
-
-            // Compara com a base de dados
-            let mensagem = "";
-
-            if (horasDiarias <= dadosPesquisa.sugestoes[0].limite) {
-                mensagem = dadosPesquisa.sugestoes[0].mensagem;
-            } else if (horasDiarias <= dadosPesquisa.sugestoes[1].limite) {
-                mensagem = dadosPesquisa.sugestoes[1].mensagem;
-            } else {
-                mensagem = dadosPesquisa.sugestoes[2].mensagem;
-            }
-
-            // Compara com a média nacional informada
-            let comparacao = "";
-
-            if (horasDiarias < dadosPesquisa.mediaNacionalDiaria) {
-                comparacao = "Seu uso está abaixo da média nacional informada de " +
-                    dadosPesquisa.mediaNacionalDiaria + " horas por dia.";
-            } else if (horasDiarias === dadosPesquisa.mediaNacionalDiaria) {
-                comparacao = "Seu uso está exatamente na média nacional informada de " +
-                    dadosPesquisa.mediaNacionalDiaria + " horas por dia.";
-            } else {
-                comparacao = "Seu uso está acima da média nacional informada de " +
-                    dadosPesquisa.mediaNacionalDiaria + " horas por dia.";
-            }
-
-            // Verifica o alerta de saúde informado na atividade
-            let alerta = "";
-
-            if (horasDiarias >= dadosPesquisa.alertaSaude) {
-                alerta = " Atenção: você atingiu ou ultrapassou o limite de " +
-                    dadosPesquisa.alertaSaude + " horas indicado na base da atividade.";
-            }
-
-            // Exibe o resultado na página
-            resultado.innerText =
-                "Você passa " + horasDiarias + " hora(s) por dia nas redes sociais.\n\n" +
-                "Tempo semanal: " + horasSemanais + " horas.\n" +
-                "Tempo mensal: " + horasMensais + " horas.\n\n" +
-                comparacao + "\n\n" +
-                mensagem + alerta +
-                "\n\nReflexão: será que você poderia usar parte desse tempo para estudar, praticar esportes, descansar ou estar com amigos e familiares?";
-        });
-    </script>
+// Permite calcular também pressionando Enter
+document.getElementById("horas").addEventListener("keydown", function(event) {
+    if (event.key === "Enter") {
+        document.getElementById("calcular").click();
+    }
+});
+</script>
 
 </body>
 </html>
