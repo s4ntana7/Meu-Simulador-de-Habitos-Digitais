@@ -1,0 +1,192 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Tempo nas Redes Sociais</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf0f8;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #3454a4;
+            font-size: 26px;
+        }
+
+        p {
+            color: #444;
+            line-height: 1.5;
+        }
+
+        input {
+            width: 80%;
+            padding: 12px;
+            margin: 15px 0;
+            border: 1px solid #aaa;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #3454a4;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #243d7c;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f2f5fc;
+            border-radius: 10px;
+            text-align: left;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>📱 Meu Tempo nas Redes Sociais</h1>
+
+        <p>
+            Quantas horas por dia você passa nas redes sociais?
+            Descubra quanto tempo isso representa na sua semana e no seu mês!
+        </p>
+
+        <input
+            type="number"
+            id="horas"
+            placeholder="Digite suas horas por dia"
+            min="0"
+            max="24"
+            step="0.5"
+        >
+
+        <br>
+
+        <button id="calcular">Calcular meu tempo</button>
+
+        <div id="resultado" aria-live="polite">
+            Seu resultado aparecerá aqui.
+        </div>
+    </div>
+
+    <script>
+        // Base de dados da pesquisa fornecida na atividade
+        const dadosPesquisa = {
+            mediaNacionalDiaria: 4,
+            alertaSaude: 6,
+            sugestoes: [
+                {
+                    limite: 2,
+                    mensagem: "Parabéns! Seu uso está equilibrado. Você tem mais tempo livre para hobbies e descanso."
+                },
+                {
+                    limite: 5,
+                    mensagem: "Atenção! Você está próximo da média nacional e já gasta bastante tempo da semana olhando para a tela."
+                },
+                {
+                    limite: 24,
+                    mensagem: "Cuidado! Seu uso é considerado muito alto. Isso pode afetar seu sono, foco e bem-estar. Que tal fazer uma pausa digital?"
+                }
+            ]
+        };
+
+        // Captura o clique do botão
+        document.getElementById("calcular").addEventListener("click", function() {
+
+            // Pega o valor digitado pelo usuário
+            const campoHoras = document.getElementById("horas");
+            const horasDiarias = Number(campoHoras.value);
+            const resultado = document.getElementById("resultado");
+
+            // Valida o valor informado
+            if (campoHoras.value.trim() === "" ||
+                !Number.isFinite(horasDiarias) ||
+                horasDiarias < 0 ||
+                horasDiarias > 24) {
+
+                resultado.innerText =
+                    "Por favor, digite um número entre 0 e 24 horas.";
+                return;
+            }
+
+            // Calcula o tempo semanal e mensal
+            const horasSemanais = horasDiarias * 7;
+            const horasMensais = horasDiarias * 30;
+
+            // Compara com a base de dados
+            let mensagem = "";
+
+            if (horasDiarias <= dadosPesquisa.sugestoes[0].limite) {
+                mensagem = dadosPesquisa.sugestoes[0].mensagem;
+            } else if (horasDiarias <= dadosPesquisa.sugestoes[1].limite) {
+                mensagem = dadosPesquisa.sugestoes[1].mensagem;
+            } else {
+                mensagem = dadosPesquisa.sugestoes[2].mensagem;
+            }
+
+            // Compara com a média nacional informada
+            let comparacao = "";
+
+            if (horasDiarias < dadosPesquisa.mediaNacionalDiaria) {
+                comparacao = "Seu uso está abaixo da média nacional informada de " +
+                    dadosPesquisa.mediaNacionalDiaria + " horas por dia.";
+            } else if (horasDiarias === dadosPesquisa.mediaNacionalDiaria) {
+                comparacao = "Seu uso está exatamente na média nacional informada de " +
+                    dadosPesquisa.mediaNacionalDiaria + " horas por dia.";
+            } else {
+                comparacao = "Seu uso está acima da média nacional informada de " +
+                    dadosPesquisa.mediaNacionalDiaria + " horas por dia.";
+            }
+
+            // Verifica o alerta de saúde informado na atividade
+            let alerta = "";
+
+            if (horasDiarias >= dadosPesquisa.alertaSaude) {
+                alerta = " Atenção: você atingiu ou ultrapassou o limite de " +
+                    dadosPesquisa.alertaSaude + " horas indicado na base da atividade.";
+            }
+
+            // Exibe o resultado na página
+            resultado.innerText =
+                "Você passa " + horasDiarias + " hora(s) por dia nas redes sociais.\n\n" +
+                "Tempo semanal: " + horasSemanais + " horas.\n" +
+                "Tempo mensal: " + horasMensais + " horas.\n\n" +
+                comparacao + "\n\n" +
+                mensagem + alerta +
+                "\n\nReflexão: será que você poderia usar parte desse tempo para estudar, praticar esportes, descansar ou estar com amigos e familiares?";
+        });
+    </script>
+
+</body>
+</html>
